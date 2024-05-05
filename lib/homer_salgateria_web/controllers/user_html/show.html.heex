@@ -1,0 +1,21 @@
+<.header>
+  User <%= @user.id %>
+  <:subtitle>This is a user record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/users/#{@user}/edit"}>
+      <.button>Edit user</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Cpf"><%= @user.cpf %></:item>
+  <:item title="Email"><%= @user.email %></:item>
+  <:item title="Nome"><%= @user.nome %></:item>
+  <:item title="Senha"><%= @user.senha %></:item>
+  <:item title="Numero telefone"><%= @user.numero_telefone %></:item>
+  <:item title="Data nascimento"><%= @user.data_nascimento %></:item>
+  <:item title="Funcao"><%= @user.funcao %></:item>
+</.list>
+
+<.back navigate={~p"/users"}>Back to users</.back>

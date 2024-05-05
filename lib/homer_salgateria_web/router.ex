@@ -18,6 +18,8 @@ defmodule HomerSalgateriaWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    resources "/login", LoginController, only: [:index, :show]
+    resources "/users", UserController
   end
 
   # Other scopes may use custom stacks.
