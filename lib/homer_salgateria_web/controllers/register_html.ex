@@ -1,7 +1,7 @@
-defmodule HomerSalgateriaWeb.UserHTML do
+defmodule HomerSalgateriaWeb.RegisterHTML do
   use HomerSalgateriaWeb, :html
 
-  embed_templates "user_html/*"
+  embed_templates "register_html/*"
 
   @doc """
   Renders a user form.

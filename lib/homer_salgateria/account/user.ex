@@ -19,7 +19,6 @@ defmodule HomerSalgateria.Account.User do
     user
     |> cast(attrs, [:cpf, :email, :nome, :senha, :numero_telefone, :data_nascimento])
     |> validate_required([:cpf, :email, :nome, :senha, :numero_telefone, :data_nascimento])
-    |> put_password_hash()
     |> validate_format(:email, ~r/@/)
     |> validate_length(:cpf, is: 11)
     |> validate_length(:numero_telefone, is: 11)
@@ -27,8 +26,11 @@ defmodule HomerSalgateria.Account.User do
     |> unique_constraint([:cpf], name: :users_cpf_index)
     |> unsafe_validate_unique([:cpf], HomerSalgateria.Repo, message: "Este CPF já está em uso")
     |> unique_constraint([:email], name: :users_email_index)
-    |> unsafe_validate_unique([:email], HomerSalgateria.Repo, message: "Este Email já está em uso")
+    |> unsafe_validate_unique([:email], HomerSalgateria.Repo,
+      message: "Este Email já está em uso"
+    )
     |> change(funcao: "cliente")
+    |> put_password_hash()
   end
 
   defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{senha: senha}} = changeset) do

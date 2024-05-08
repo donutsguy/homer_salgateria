@@ -28,17 +28,27 @@ defmodule HomerSalgateriaWeb.Router do
     pipe_through [:browser, :auth]
 
     get "/", PageController, :home
-    resources "/users", UserController
-
-    get "/login", SessionController, :new
-    post "/login", SessionController, :login
-    get "/logout", SessionController, :logout
+    # resources "/users", UserController
   end
 
   scope "/", HomerSalgateriaWeb do
     pipe_through [:browser, :auth, :ensure_auth]
 
     get "/protected", PageController, :protected
+  end
+
+  scope "/user", HomerSalgateriaWeb do
+    pipe_through [:browser, :auth]
+
+    resources "/register", RegisterController, only: [:new, :create]
+
+    resources "/login", UserSessionController, only: [:new, :create]
+    get "/logout", UserSessionController, :logout
+
+    resources "/settings", UserSessionController, only: [:edit, :update]
+    # delete "/settings/:id", UserSettingsController, :delete
+
+    resources "/reset_password", ResetPasswordController, except: [:index, :show, :delete]
   end
 
   # Other scopes may use custom stacks.
