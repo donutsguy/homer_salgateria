@@ -13,5 +13,8 @@ defmodule HomerSalgateria.Repo.Migrations.CreateUsers do
 
       timestamps(type: :utc_datetime)
     end
+
+    create unique_index(:users, [:cpf], name: :users_cpf_index)
+    create unique_index(:users, [:email], name: :users_email_index)
   end
 end

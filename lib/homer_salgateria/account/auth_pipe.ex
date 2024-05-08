@@ -1,4 +1,4 @@
-defmodule HomerSalgateria.Account.Pipeline do
+defmodule HomerSalgateria.Account.AuthPipe do
   use Guardian.Plug.Pipeline,
     otp_app: :homer_salgateria,
     error_handler: HomerSalgateria.Account.ErrorHandler,

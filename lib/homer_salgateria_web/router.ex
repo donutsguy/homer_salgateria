@@ -1,6 +1,16 @@
 defmodule HomerSalgateriaWeb.Router do
   use HomerSalgateriaWeb, :router
 
+  # procuramos um token para carregar o recurso.
+  pipeline :auth do
+    plug HomerSalgateria.Account.AuthPipe
+  end
+
+  # exigimos um certo token.
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -15,11 +25,20 @@ defmodule HomerSalgateriaWeb.Router do
   end
 
   scope "/", HomerSalgateriaWeb do
-    pipe_through :browser
+    pipe_through [:browser, :auth]
 
     get "/", PageController, :home
-    resources "/login", LoginController, only: [:index, :show]
     resources "/users", UserController
+
+    get "/login", SessionController, :new
+    post "/login", SessionController, :login
+    get "/logout", SessionController, :logout
+  end
+
+  scope "/", HomerSalgateriaWeb do
+    pipe_through [:browser, :auth, :ensure_auth]
+
+    get "/protected", PageController, :protected
   end
 
   # Other scopes may use custom stacks.

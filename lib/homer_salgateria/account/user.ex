@@ -24,6 +24,10 @@ defmodule HomerSalgateria.Account.User do
     |> validate_length(:cpf, is: 11)
     |> validate_length(:numero_telefone, is: 11)
     |> validate_length(:nome, min: 2, max: 60)
+    |> unique_constraint([:cpf], name: :users_cpf_index)
+    |> unsafe_validate_unique([:cpf], HomerSalgateria.Repo, message: "Este CPF já está em uso")
+    |> unique_constraint([:email], name: :users_email_index)
+    |> unsafe_validate_unique([:email], HomerSalgateria.Repo, message: "Este Email já está em uso")
     |> change(funcao: "cliente")
   end
 
