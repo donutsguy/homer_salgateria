@@ -1,9 +1,9 @@
 <.simple_form :let={f} for={@changeset} action={@action}>
   <.error :if={@changeset.action}>
-    Oops, something went wrong! Please check the errors below.
+    Alguma coisa deu errado! Verifique os erros abaixo.
   </.error>
-  <.input field={f[:email]} type="text" label="email" />
-  <.input field={f[:senha]} type="text" label="senha" />
+  <.input field={f[:email]} type="text" label="Email" />
+  <.input field={f[:senha]} type="text" label="Senha" />
   <:actions>
     <.button>Login</.button>
   </:actions>

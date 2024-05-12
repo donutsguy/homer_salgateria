@@ -12,7 +12,8 @@ defmodule HomerSalgateriaWeb.RegisterController do
 
   def new(conn, _params) do
     changeset = Account.change_user(%User{})
-    render(conn, :new, changeset: changeset)
+    render(conn, :new, changeset: changeset, action: ~p"/user/register")
+    # render(conn, :new, changeset: changeset, action: ~p"/user/login/")
   end
 
   def create(conn, %{"user" => user_params}) do
@@ -23,7 +24,7 @@ defmodule HomerSalgateriaWeb.RegisterController do
         |> redirect(to: ~p"/user/login/new")
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, :new, changeset: changeset)
+        render(conn, :new, changeset: changeset, action: ~p"/user/register")
     end
   end
 

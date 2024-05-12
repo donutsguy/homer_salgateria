@@ -4,13 +4,13 @@ defmodule HomerSalgateriaWeb.UserSessionController do
   alias HomerSalgateria.{Account, Account.User, Account.Guardian}
 
   def new(conn, _) do
-    changeset = Account.change_user(%User{})
+    changeset = Account.change_login(%User{})
     maybe_user = Guardian.Plug.current_resource(conn)
 
     if maybe_user do
       redirect(conn, to: ~p"/protected")
     else
-      render(conn, :new, changeset: changeset, action: ~p"/user/login/new")
+      render(conn, :new, changeset: changeset, action: ~p"/user/login")
     end
   end
 

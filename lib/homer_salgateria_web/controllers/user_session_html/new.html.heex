@@ -1,8 +1,19 @@
-<.header>
-  Login
-  <:subtitle>Faça o login.</:subtitle>
-</.header>
-
-<.login_form changeset={@changeset} action={~p"/user/login/"} />
-
+<.header class="text-center">
+    Faça o Login
+    <:subtitle>
+      Não tem uma conta ainda?
+      <.link navigate={~p"/user/register/new"} class="font-semibold text-brand hover:underline">
+        Registre-se
+      </.link>
+      para criar uma conta.
+    </:subtitle>
+  </.header>
+<.login_form changeset={@changeset} action={@action} />
+  <div class="text-right">
+    <small>
+      <.link navigate={~p"/user/reset_password/new"} class="font-semibold text-brand hover:underline">
+        Esqueci minha senha
+      </.link>
+    </small>
+  </div>
 

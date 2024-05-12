@@ -54,7 +54,7 @@ defmodule HomerSalgateria.Account do
   """
   def create_user(attrs \\ %{}) do
     %User{}
-    |> User.changeset(attrs)
+    |> User.validate_register(attrs)
     |> Repo.insert()
   end
 
@@ -72,7 +72,7 @@ defmodule HomerSalgateria.Account do
   """
   def update_user(%User{} = user, attrs) do
     user
-    |> User.changeset(attrs)
+    |> User.validate_register(attrs)
     |> Repo.update()
   end
 
@@ -102,7 +102,15 @@ defmodule HomerSalgateria.Account do
 
   """
   def change_user(%User{} = user, attrs \\ %{}) do
-    User.changeset(user, attrs)
+    User.validate_register(user, attrs)
+  end
+
+  def change_login(%User{} = user, attrs \\ %{}) do
+    User.validate_login(user, attrs)
+  end
+
+  def change_req_reset_password(%User{} = user, attrs \\ %{}) do
+    User.validate_req_reset_password(user, attrs)
   end
 
   def authenticate_user(username, plain_text_password) do
@@ -121,4 +129,10 @@ defmodule HomerSalgateria.Account do
         end
     end
   end
+
+  def deliver_reset_password_instructions(user) do
+    
+  end
+
+  def get_user_email!(email), do: Repo.get!(User, email)
 end
