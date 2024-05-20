@@ -1,0 +1,8 @@
+<.header>
+  Novo produto ao estoque
+  <:subtitle>Adicione produtos ao estoque preenchendo este formulário.</:subtitle>
+</.header>
+
+<.stock_form changeset={@changeset} action={~p"/stocks"} produtos={@produtos} />
+
+<.back navigate={~p"/stocks"}>Voltar ao estoque</.back>

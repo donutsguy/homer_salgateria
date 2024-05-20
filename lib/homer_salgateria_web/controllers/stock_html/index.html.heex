@@ -1,0 +1,25 @@
+<.header>
+  Listando produtos do estoque
+  <:actions>
+    <.link href={~p"/stocks/new"}>
+      <.button>Adicionar novo produto</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="stocks" rows={@stocks} row_click={&JS.navigate(~p"/stocks/#{&1}")}>
+  <:col :let={stock} label="Id do Insumo"><%= stock.supply_id %></:col>
+  <:col :let={stock} label="Data validade"><%= stock.data_validade %></:col>
+  <:col :let={stock} label="Quantidade"><%= stock.quantidade %></:col>
+  <:action :let={stock}>
+    <div class="sr-only">
+      <.link navigate={~p"/stocks/#{stock}"}>Exibir</.link>
+    </div>
+    <.link navigate={~p"/stocks/#{stock}/edit"}>Editar</.link>
+  </:action>
+  <:action :let={stock}>
+    <.link href={~p"/stocks/#{stock}"} method="delete" data-confirm="Você tem certeza?">
+      Deletar
+    </.link>
+  </:action>
+</.table>

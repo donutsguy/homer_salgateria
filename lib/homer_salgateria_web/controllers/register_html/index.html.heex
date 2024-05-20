@@ -2,7 +2,7 @@
   Listing Users
   <:actions>
     <.link href={~p"/user/login/new"}>
-      <.button>New User</.button>
+      <.button>Novo cadastro</.button>
     </.link>
   </:actions>
 </.header>
@@ -17,12 +17,12 @@
   <:col :let={user} label="Funcao"><%= user.funcao %></:col>
   <:action :let={user}>
     <div class="sr-only">
-      <.link navigate={~p"/users/#{user}"}>Show</.link>
+      <.link navigate={~p"/users/#{user}"}>Exibir</.link>
     </div>
-    <.link navigate={~p"/users/#{user}/edit"}>Edit</.link>
+    <.link navigate={~p"/users/#{user}/edit"}>Editar</.link>
   </:action>
   <:action :let={user}>
-    <.link href={~p"/users/#{user}"} method="delete" data-confirm="Are you sure?">
+    <.link href={~p"/users/#{user}"} method="delete" data-confirm="Você tem certeza?">
       Delete
     </.link>
   </:action>

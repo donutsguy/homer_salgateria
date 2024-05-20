@@ -1,0 +1,24 @@
+<.header>
+  Listando Insumos
+  <:actions>
+    <.link href={~p"/supplies/new"}>
+      <.button>Novo Insumo</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="supplies" rows={@supplies} row_click={&JS.navigate(~p"/supplies/#{&1}")}>
+  <:col :let={supply} label="Nome"><%= supply.nome %></:col>
+  <:col :let={supply} label="Tipo"><%= supply.tipo %></:col>
+  <:action :let={supply}>
+    <div class="sr-only">
+      <.link navigate={~p"/supplies/#{supply}"}>Exibir</.link>
+    </div>
+    <.link navigate={~p"/supplies/#{supply}/edit"}>Editar</.link>
+  </:action>
+  <:action :let={supply}>
+    <.link href={~p"/supplies/#{supply}"} method="delete" data-confirm="Are you sure?">
+      Deletar
+    </.link>
+  </:action>
+</.table>

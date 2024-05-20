@@ -1,13 +1,13 @@
-defmodule HomerSalgateriaWeb.ResetPasswordHTML do
+defmodule HomerSalgateriaWeb.SupplyHTML do
   use HomerSalgateriaWeb, :html
 
-  embed_templates "reset_password_html/*"
+  embed_templates "supply_html/*"
 
   @doc """
-  Renders a user form.
+  Renders a supply form.
   """
   attr :changeset, Ecto.Changeset, required: true
   attr :action, :string, required: true
 
-  def user_form(assigns)
+  def supply_form(assigns)
 end

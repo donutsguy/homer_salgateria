@@ -1,0 +1,11 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Algo deu errado, cheque os erros abaixo.
+  </.error>
+  <.input field={f[:supply_id]} type="select" options={@produtos} label="Insumos" />
+  <.input field={f[:quantidade]} type="number" step="0.01" min="0" oninput="validity.valid||(value='');" label="Quantidade(KG/L)" />
+  <.input field={f[:data_validade]} type="date" label="Data validade" />
+  <:actions>
+    <.button>Adicionar ao estoque</.button>
+  </:actions>
+</.simple_form>

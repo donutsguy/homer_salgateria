@@ -1,0 +1,10 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Algo deu errado, cheque os erros abaixo.
+  </.error>
+  <.input field={f[:nome]} type="text" label="Nome" />
+  <.input field={f[:tipo]} type="select" options={@tipos} label="Insumos" />
+    <:actions>
+    <.button>Adicionar ao estoque</.button>
+  </:actions>
+</.simple_form>

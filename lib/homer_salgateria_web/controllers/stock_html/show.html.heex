@@ -1,0 +1,17 @@
+<.header>
+  Produto <%= @stock.id %>
+  <:subtitle>Este é um produto do seu estoque.</:subtitle>
+  <:actions>
+    <.link href={~p"/stocks/#{@stock}/edit"}>
+      <.button>Editar produto no estoque</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Id do Insumo"><%= @stock.supply_id %></:item>
+  <:item title="Data validade"><%= @stock.data_validade %></:item>
+  <:item title="Quantidade"><%= @stock.quantidade %></:item>
+</.list>
+
+<.back navigate={~p"/stocks"}>Voltar ao estoque</.back>

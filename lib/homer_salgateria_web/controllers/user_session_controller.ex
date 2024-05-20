@@ -27,7 +27,7 @@ defmodule HomerSalgateriaWeb.UserSessionController do
 
   defp login_reply({:ok, user}, conn) do
     conn
-    |> put_flash(:info, "Welcome back!")
+    |> put_flash(:info, "Bem vindo de volta!")
     |> Guardian.Plug.sign_in(user)
     |> redirect(to: ~p"/protected")
   end
@@ -50,7 +50,7 @@ defmodule HomerSalgateriaWeb.UserSessionController do
     case Account.update_user(user, user_params) do
       {:ok, _user} ->
         conn
-        |> put_flash(:info, "User updated successfully.")
+        |> put_flash(:info, "Usuário atualizado com sucesso!.")
         |> redirect(to: ~p"/protected")
 
       {:error, %Ecto.Changeset{} = changeset} ->

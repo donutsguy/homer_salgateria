@@ -7,7 +7,7 @@ defmodule HomerSalgateria.Account do
 
   alias HomerSalgateria.Repo
 
-  alias HomerSalgateria.Account.User
+  alias HomerSalgateria.Account.{User, UserToken}
 
   alias Argon2
 
@@ -54,7 +54,7 @@ defmodule HomerSalgateria.Account do
   """
   def create_user(attrs \\ %{}) do
     %User{}
-    |> User.validate_register(attrs)
+    |> User.registration_changeset(attrs)
     |> Repo.insert()
   end
 
@@ -72,7 +72,7 @@ defmodule HomerSalgateria.Account do
   """
   def update_user(%User{} = user, attrs) do
     user
-    |> User.validate_register(attrs)
+    |> User.registration_changeset(attrs)
     |> Repo.update()
   end
 
@@ -102,19 +102,19 @@ defmodule HomerSalgateria.Account do
 
   """
   def change_user(%User{} = user, attrs \\ %{}) do
-    User.validate_register(user, attrs)
+    User.registration_changeset(user, attrs)
   end
 
   def change_login(%User{} = user, attrs \\ %{}) do
-    User.validate_login(user, attrs)
+    User.login_changeset(user, attrs)
   end
 
   def change_req_reset_password(%User{} = user, attrs \\ %{}) do
-    User.validate_req_reset_password(user, attrs)
+    User.change_password_changeset(user, attrs)
   end
 
   def authenticate_user(username, plain_text_password) do
-    query = from u in User, where: u.email == ^username
+    query = from(u in User, where: u.email == ^username)
 
     case Repo.one(query) do
       nil ->
@@ -130,9 +130,29 @@ defmodule HomerSalgateria.Account do
     end
   end
 
-  def deliver_reset_password_instructions(user) do
-    
+  def insert_password_instructions(user_struct) do
+    Repo.insert!(user_struct)
   end
 
-  def get_user_email!(email), do: Repo.get!(User, email)
+  def get_user_by_reset_password_token(token) do
+    with query <- UserToken.verify_email_token_query(token, "reset_password"),
+         %User{} = user <- Repo.one(query) do
+      user
+    else
+      _ -> nil
+    end
+  end
+
+  def get_user_email(email), do: from(u in User, where: u.email == ^email) |> Repo.one()
+
+  def reset_user_password(user, attrs) do
+    Ecto.Multi.new()
+    |> Ecto.Multi.update(:user, User.change_password_changeset(user, attrs))
+    |> Ecto.Multi.delete_all(:tokens, UserToken.by_user_and_contexts_query(user, :all))
+    |> Repo.transaction()
+    |> case do
+      {:ok, %{user: user}} -> {:ok, user}
+      {:error, :user, changeset, _} -> {:error, changeset}
+    end
+  end
 end

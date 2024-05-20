@@ -1,8 +1,8 @@
 <.header>
-  Edit User <%= @user.id %>
-  <:subtitle>Use this form to manage user records in your database.</:subtitle>
+  Editar Usuário <%= @user.id %>
+  <:subtitle>Use este formulário para editar o seu perfil.</:subtitle>
 </.header>
 
 <.user_form changeset={@changeset} action={~p"/user/settings/#{@user}"} />
 
-<.back navigate={~p"/"}>Back to users</.back>
+<.back navigate={~p"/"}>Voltar ao início</.back>

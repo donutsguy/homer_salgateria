@@ -20,7 +20,7 @@ defmodule HomerSalgateriaWeb.RegisterController do
     case Account.create_user(user_params) do
       {:ok, _user} ->
         conn
-        |> put_flash(:info, "Account created successfully.")
+        |> put_flash(:info, "Conta criada com sucesso!")
         |> redirect(to: ~p"/user/login/new")
 
       {:error, %Ecto.Changeset{} = changeset} ->

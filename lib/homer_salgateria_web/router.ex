@@ -28,6 +28,8 @@ defmodule HomerSalgateriaWeb.Router do
     pipe_through [:browser, :auth]
 
     get "/", PageController, :home
+    resources "/stocks", StockController
+
     # resources "/users", UserController
   end
 
@@ -49,6 +51,12 @@ defmodule HomerSalgateriaWeb.Router do
     # delete "/settings/:id", UserSettingsController, :delete
 
     resources "/reset_password", ResetPasswordController, except: [:index, :show, :delete]
+  end
+
+  scope "/supplies", HomerSalgateriaWeb do
+    pipe_through [:browser]
+
+    resources "/", SupplyController
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,16 @@
+<.header>
+  Supply <%= @supply.id %>
+  <:subtitle>Este é um Insumo.</:subtitle>
+  <:actions>
+    <.link href={~p"/supplies/#{@supply}/edit"}>
+      <.button>Editar Insummo</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Nome"><%= @supply.nome %></:item>
+  <:item title="Tipo"><%= @supply.tipo %></:item>
+</.list>
+
+<.back navigate={~p"/supplies"}>Voltar aos Insumos</.back>

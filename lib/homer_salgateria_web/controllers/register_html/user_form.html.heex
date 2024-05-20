@@ -1,14 +1,15 @@
 <.simple_form :let={f} for={@changeset} action={@action}>
   <.error :if={@changeset.action}>
-    Oops, something went wrong! Please check the errors below.
+    Algo deu errado, cheque os erros abaixo.
   </.error>
   <.input field={f[:cpf]} type="text" label="CPF" />
   <.input field={f[:email]} type="text" label="Email" />
   <.input field={f[:nome]} type="text" label="Nome" />
-  <.input field={f[:senha]} type="text" label="Senha" />
+  <.input field={f[:senha]} type="password" label="Senha" />
+  <.input field={f[:senha_confirmation]} type="password" label="Confirme a senha" />
   <.input field={f[:numero_telefone]} type="text" label="Numero telefone" />
   <.input field={f[:data_nascimento]} type="date" label="Data nascimento" />
   <:actions>
-    <.button>Save User</.button>
+    <.button>Cadastrar</.button>
   </:actions>
 </.simple_form>

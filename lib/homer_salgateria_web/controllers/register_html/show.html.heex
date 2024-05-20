@@ -1,9 +1,9 @@
 <.header>
-  User <%= @user.id %>
-  <:subtitle>This is a user record from your database.</:subtitle>
+  Usuário <%= @user.id %>
+  <:subtitle>Esse é um cadastro.</:subtitle>
   <:actions>
     <.link href={~p"/user/settings/#{@user}/edit"}>
-      <.button>Edit user</.button>
+      <.button>Editar usuário</.button>
     </.link>
   </:actions>
 </.header>
@@ -18,4 +18,4 @@
   <:item title="Funcao"><%= @user.funcao %></:item>
 </.list>
 
-<.back navigate={~p"/protected"}>Back to users</.back>
+<.back navigate={~p"/protected"}>Voltar a página protegida</.back>

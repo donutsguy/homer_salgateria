@@ -1,0 +1,8 @@
+<.header>
+  Editar insumo <%= @supply.id %>
+  <:subtitle>Use este formulário para gerenciar os Insumos.</:subtitle>
+</.header>
+
+<.supply_form changeset={@changeset} action={~p"/supplies/#{@supply}"} />
+
+<.back navigate={~p"/supplies"}> Voltar aos Insumos </.back>

@@ -1,0 +1,11 @@
+<.simple_form :let={f} for={@changeset} action={~p"/user/reset_password/#{@token}"} method={"patch"}>
+  <.error :if={@changeset.action}>
+    Algo deu errado, cheque os erros abaixo.
+  </.error>
+  <.input field={f[:senha]} type="password" label="Nova Senha" />
+  <.input field={f[:senha_confirmation]} type="password" label="Confirme a nova senha" />
+  
+  <:actions>
+    <.button>Redefinir senha</.button>
+  </:actions>
+</.simple_form>

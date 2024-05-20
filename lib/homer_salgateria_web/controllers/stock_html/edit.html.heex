@@ -1,0 +1,8 @@
+<.header>
+  Editar o estoque <%= @stock.id %>
+  <:subtitle>Use este formulário para gerenciar o estoque.</:subtitle>
+</.header>
+
+<.stock_form changeset={@changeset} action={~p"/stocks/#{@stock}"} />
+
+<.back navigate={~p"/stocks"}>Voltar ao estoque</.back>
